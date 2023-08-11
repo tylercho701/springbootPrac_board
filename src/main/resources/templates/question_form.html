@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko"xmlns:th="http://www.thymeleaf.org"
-			   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+			   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+			   layout:decorate="~{layout}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,9 +12,7 @@
 	<div layout:fragment="content" class="container">
 	    <h5 class="my-3 border-bottom pb-2">질문등록</h5>
 	    <form th:action="@{/question/create}" method="post" th:object="${questionFormDto}">
-	    	<div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">
-	    		<div th:each="error : ${#fields.allErrors()}" th:text="${error}"></div>
-	    	</div>
+	    	<div th:replace="form_errors::formErrorsFragment"></div>
 	        <div class="mb-3">
 	            <label for="subject" class="form-label">제목</label>
 	            <input type="text" id="subject" th:field="*{subject}" class="form-control">

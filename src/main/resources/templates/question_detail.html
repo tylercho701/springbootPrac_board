@@ -38,10 +38,9 @@
     </div>
 
     <form th:action="@{|/answer/create/${question.id}|}" method="post" class="my-3" th:object="${answerFormDto}">
-    	<div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">
-    		<div th:each="error : ${#fields.allErrors()}" th:text="${error}"></div>
-    	</div>
-        <textarea id="content" rows="10" class="form-control" th:field="*{content}"></textarea>
+    	<div th:replace="form_errors::formErrorsFragment"></div>
+    	<textarea sec:authorize="isAnonymous()" disabled th:field="*{content}" class="form-control" rows="10"></textarea>
+        <textarea sec:authorize="isAuthenticated()" th:field="*{content}" class="form-control" rows="10"></textarea>
         <input type="submit" value="답변달기" class="btn btn-primary my-2" >
     </form>
 </div>
