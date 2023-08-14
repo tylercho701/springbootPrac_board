@@ -1,6 +1,7 @@
 package com.tjoeun.entity;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 import lombok.Getter;
@@ -36,4 +38,9 @@ public class Answer {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	private Users users;
+	
+	private LocalDateTime modifyDate;
+	
+	@ManyToMany(fetch = FetchType.LAZY)
+	Set<Users> voter;
 }
