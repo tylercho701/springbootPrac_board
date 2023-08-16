@@ -52,4 +52,8 @@ public class Question {
 	@ManyToMany(fetch = FetchType.LAZY)
 	Set<Users> voter;
 	
+	@OneToMany(mappedBy = "question", cascade = CascadeType.ALL, 
+			   orphanRemoval = true, fetch = FetchType.LAZY)
+	private List<Comment> commentList = new ArrayList<>();
+	
 }
